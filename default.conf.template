@@ -1,0 +1,12 @@
+server {
+    listen ${NGINX_PORT};
+
+    location / {
+        proxy_pass ${NGINX_PROXY_URL};
+        proxy_set_header Host $host:$server_port;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection upgrade;
+        proxy_set_header Accept-Encoding gzip;
+    }
+}

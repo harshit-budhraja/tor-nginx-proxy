@@ -1,0 +1,15 @@
+---
+version: '3'
+
+services:
+    tor-nginx-proxy:
+        container_name: tor-nginx-proxy
+        image: harshitbudhraja/tor-nginx-proxy:latest
+        restart: unless-stopped
+        environment:
+            - NGINX_PORT=80
+            - NGINX_PROXY_URL=<YOUR_APP_URL>
+        ports: 
+            - 3000:80
+        volumes:
+            - ./tor:/var/lib/tor/
