@@ -16,6 +16,8 @@ The super easy and quick way to setup your web presence on the [Tor](https://www
 
 ## Usage
 
+### Quick Start (not recommended for production)
+
 1. Setup the proxy server at the **first time**
 
 ```sh
@@ -53,6 +55,47 @@ is serving from the file by reading it in any editor or terminal itself: `cat /a
 
 4. Finally, open up the [Tor Browser](https://www.torproject.org/download/) and head over to your .onion link to check if it's working.
 
+### With Docker Compose
+
+1. Create a new directory with a name of your choice and navigate inside it: `mkdir tor-nginx-proxy && cd tor-nginx-proxy`
+2. Download the `docker-compose.yml`:
+
+**Using curl:**
+
+```bash
+curl https://raw.githubusercontent.com/harshit-budhraja/tor-nginx-proxy/master/docker-compose.yml --output docker-compose.yml
+```
+
+**Using wget:**
+
+```bash
+wget -O docker-compose.yml  https://raw.githubusercontent.com/harshit-budhraja/tor-nginx-proxy/master/docker-compose.yml
+```
+
+3. Modify value for the environment variable `NGINX_PROXY_URL` to configure your proxy pass url. When a request arrives to the container which is running over the tor network through tor-nginx-proxy, it proxies those requests to your application which must be accessible over the url you provide. (Tip: don't forget to include the protocol `http://` or `https://` and the port that your application is serving from).
+
+4. Bring the service up: `docker-compose up`. This will start the service in an attached-state with your terminal. What this means is that the moment you press Ctrl+C, the service shuts down. To start the service in a detached-state, use the `-d` parameter with the command like: `docker-compose up -d`.
+
+5. Make sure it's running, it usually takes a short time to bootstrap `Tor`:
+
+```sh
+$ docker-compose logs
+.
+.
+.
+Jan 10 01:06:59.000 [notice] Bootstrapped 85%: Finishing handshake with first hop
+Jan 10 01:07:00.000 [notice] Bootstrapped 90%: Establishing a Tor circuit
+Jan 10 01:07:02.000 [notice] Tor has successfully opened a circuit. Looks like client functionality is working.
+Jan 10 01:07:02.000 [notice] Bootstrapped 100%: Done
+.
+.
+.
+```
+
+6. Once you see that Tor is bootstrapped in your container logs, you can get the vanity .onion url on which your proxy
+is serving from the file by reading it in any editor or terminal itself: `cat /absolute/path/to/volume/dir/on/host/tor/hidden_service/hostname`.
+
+7. Finally, open up the [Tor Browser](https://www.torproject.org/download/) and head over to your .onion link to check if it's working.
 
 **NOTE:** Do not remove or alter the contents of the `/absolute/path/to/volume/dir/on/host/tor/` directory while the service is running, as this is directly mounted to your container.
 
