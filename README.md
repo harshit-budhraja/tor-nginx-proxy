@@ -4,8 +4,10 @@
 
 # Tor-nginx-proxy
 
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/harshit-budhraja/tor-nginx-proxy?include_prereleases)
 ![license](https://img.shields.io/badge/license-GPLv3.0-brightgreen.svg?style=flat)
 [![Docker Hub pulls](https://img.shields.io/docker/pulls/harshitbudhraja/tor-nginx-proxy.svg)](https://hub.docker.com/r/harshitbudhraja/tor-nginx-proxy/)
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/harshitbudhraja/tor-nginx-proxy/latest)
 
 [![Docker Hub badge](http://dockeri.co/image/harshitbudhraja/tor-nginx-proxy)](https://hub.docker.com/r/harshitbudhraja/tor-nginx-proxy/)
 
